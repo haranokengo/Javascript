@@ -8,15 +8,63 @@
   </head>
   <body>
     <h1>9章【「トップへ戻る」ボタンを作ってみよう】</h1>
+    <h1>10章【ハンバーガーメニューを作ってみよう】</h1>
+    <h1>11章【タブメニューを作ってみよう】</h1>
 
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
+    <div class="wrap">
+      <ul id="tab-menu">
+        <li><a href="#tab1" class="active">TAB1</a></li>
+        <li><a href="#tab2" class="">TAB2</a></li>
+        <li><a href="#tab3" class="">TAB3</a></li>
+        <li><a href="#tab4" class="">TAB4</a></li>
+      </ul>
+
+      <div id="tab-contents">
+        <div id="tab1" class="tab">
+          <p>TAB1のテキストが入ります。</p>
+        </div>
+
+        <div id="tab2" class="tab">
+          <p>TAB2のテキストが入ります。TAB2のテキストが入ります。</p>
+        </div>
+
+        <div id="tab3" class="tab">
+          <p>TAB3のテキストが入ります。TAB3のテキストが入ります。TAB3のテキストが入ります。</p>
+        </div>
+
+        <div id="tab4" class="tab">
+          <p>TAB4のテキストが入ります。TAB4のテキストが入ります。TAB4のテキストが入ります。TAB4のテキストが入ります。</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="sp-menu">
+      <h2>MENU</h2>
+      <ul>
+        <li><a href="#">MENU1</a></li>
+        <li><a href="#">MENU2</a></li>
+        <li><a href="#">MENU3</a></li>
+        <li><a href="#">MENU4</a></li>
+        <li><a href="#">MENU5</a></li>
+      </ul>
+    </div>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+    <div class="box" style="background-image: url(img/test1.jpg)"></div>
+    <div class="box" style="background-image: url(img/test2.jpg)"></div>
+    <div class="box" style="background-image: url(img/test3.jpg)"></div>
+    <div class="box" style="background-image: url(img/test4.jpg)"></div>
+    <div class="box" style="background-image: url(img/test5.jpg)"></div>
+    <div class="box" style="background-image: url(img/test5.jpg)"></div>
+    <div class="box" style="background-image: url(img/test5.jpg)"></div>
+    <div class="box" style="background-image: url(img/test5.jpg)"></div>
 
     <span id="back">
       <a href="#">
