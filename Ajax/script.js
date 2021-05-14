@@ -1,4 +1,6 @@
-const API_KEY = process.env.TEST;
+
+// require('dotenv').config();
+const API_KEY = env.TEST;
 
 $(function(){
   $('#btn').on('click', function() {

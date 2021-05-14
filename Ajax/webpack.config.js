@@ -1,44 +1,22 @@
-// const path = require('path');
-// const webpack = require('webpack');
-// const environment = process.env.TEST || 'development';
-
-// module.exports = {
-//     // エントリーポイントの設定
-//     entry: './src/my-main.js',
-//     // ビルド後、'./dist/my-bundle.js'というbundleファイルを生成する
-//     output: {
-//         path: path.resolve(__dirname, 'dist'),
-//         filename: 'my-bundle.js'
-//     },
-//     resolve: {
-//         extensions: ['.js', '.jsx'],
-//         alias: {
-//           AppConfig: path.join(__dirname, `/src/config/${environment}.js`)
-//         }
-//       },
-    
-// };
-
+const Dotenv = require('dotenv-webpack');
+const path = require('path');
 var webpack = require('webpack');
-require('dotenv').config();
-
-var defineEnv = new webpack.DefinePlugin({
-  'process.env': {
-    'TEST': JSON.stringify(process.env.TEST)
-  }
-});
 
 module.exports = {
-  context: __dirname + '/app',
-
-  entry: {
-    js: "./sample.js"
-  },
-
+  // モードの設定、v4系以降はmodeを指定しないと、webpack実行時に警告が出る
+  mode: 'development',
+  // エントリーポイントの設定
+  entry: './script.js',
+  // 出力の設定
   output: {
-    path: __dirname + '/dist',
-    filename: "./bundle.js"
+    // 出力するファイル名
+    filename: 'bundle.js',
+    // 出力先のパス（絶対パスを指定する必要がある）
+    path: path.join(__dirname, 'public/js')
+  }
+  plugins: {
+    new webpack.DefinePlugin({
+        'process.env.TEST': JSON.stringify('development')
+    })
   },
-
-  plugins: [defineEnv]
 };
