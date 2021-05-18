@@ -53,7 +53,7 @@
       var score = 0;
 
       // ライフ
-      var lives = 3;
+      var lives = 1;
 
       // ブロックオブジェクト
       var bricks = [];
@@ -198,6 +198,7 @@
             dy = -dy;
           }
           else {
+            lives--;
             if(!lives) {
                 alert("GAME OVER");
                 document.location.reload();
@@ -208,7 +209,6 @@
                 dx = 3;
                 dy = -3;
                 paddleX = (canvas.width-paddleWidth)/2;
-                lives--;
             }
           }
         }
