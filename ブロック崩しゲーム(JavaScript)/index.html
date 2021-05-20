@@ -16,6 +16,7 @@
       canvas.setAttribute('style', 'display: block; margin:0 auto; background-color: #ddd;');
 
       document.body.appendChild(canvas);
+      
 
 
 
@@ -75,11 +76,7 @@
           })
         }
       }
-
-      let level = 0
-
-
-      let level0 = [
+      const level = [
         [0,0,0,0,0,0],
         [0,0,0,0,0,0],
         [1,1,1,1,1,1],
@@ -87,15 +84,7 @@
         [1,1,1,1,1,1],
         [1,1,1,1,1,1],
       ]
-
-      let level1 = [
-        [1,0,1,0,0,1],
-        [0,1,1,1,1,0],
-        [1,0,0,0,0,1],
-        [1,0,0,0,0,1],
-        [1,1,1,1,1,1],
-        [1,1,1,1,1,1],
-      ]
+      
 
       let score = 0;
 
@@ -114,7 +103,7 @@
         paddle.y = canvas.height - paddle.height;
 
         ball.x = canvas.width / 2;
-        ball.y = canvas.height / 2 + 50;
+        ball.y = canvas.height / 2 + 160;
         ball.dx = ball.speed;
         ball.dy = ball.speed;
 
@@ -160,9 +149,8 @@
             if(block.data.splice(index, 1));
             if(score == 24) {
               alert("YOU WIN, CONGRATULATION!");
-              // document.location.reload();
+              document.location.reload();
             }
-            level++
           }
         })
 
