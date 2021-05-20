@@ -161,8 +161,17 @@
       loop();
 
       document.addEventListener('keydown', e => {
-        if(e.key == 'ArrowLeft') paddle.speed = -6;
-        if(e.key == 'ArrowRight') paddle.speed = 6;
+
+        if(e.key == 'ArrowLeft') {
+          if(paddle.x > 0){
+            paddle.speed = -6;
+          }
+        }
+        if(e.key == 'ArrowRight') {
+          if(paddle.x < canvas.width - paddle.width) {
+            paddle.speed = 6;
+          }
+        }
       });
       document.addEventListener('keyup', () => paddle.speed = 0);
     </script>
