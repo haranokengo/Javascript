@@ -2,7 +2,7 @@
       const ctx = canvas.getContext('2d');
 
       const paddleHeight = 10;
-      const paddleWidth = 50;
+      let paddleWidth = 50;
       const paddleOffsetBottom = 80;
       let paddleX = (canvas.width - paddleWidth) / 2;
 
@@ -30,7 +30,11 @@
 
       let lives = 3;
 
-      const bricks = [];
+      const item = 10;
+      let itemY = 0;
+      let itemX = 50;
+
+      let bricks = [];
       for(let c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
         for(let r = 0; r < brickRowCount; r++) {
@@ -49,12 +53,6 @@
         }
       }
 
-      function drawTime() {
-        ctx.font = "30px 'Comic Sans MS'";
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText(timer, canvas.width/2-30, 40);
-      }
-
       function drawBricks() {
         for(let c = 0; c < brickColumnCount; c++) {
           for(let r = 0; r < brickRowCount; r++) {
@@ -71,6 +69,15 @@
             }
           }
         }
+      }
+
+      function drawItem() {
+        ctx.beginPath();
+        ctx.arc(itemX, itemY, item, 0, Math.PI*2);
+        ctx.fillStyle = "red"
+        ctx.fill();
+        ctx.closePath();
+        itemY++
       }
 
       function drawBall() {
@@ -152,6 +159,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
         drawBall();
+        drawItem();
         drawPaddle();
         drawScore();
         drawLives();
@@ -182,6 +190,14 @@
               paddleX = (canvas.width - paddleWidth) / 2;
             }
           }
+        }
+
+        if(itemY > canvas.height-paddleOffsetBottom-ballRadius){
+          // if(itemY < canvas.height-paddleOffsetBottom-ballRadius+brickHeight) {
+            if(itemX > paddleX && itemX < paddleX + paddleWidth) {
+              paddleWidth = 100;
+            }
+          // }
         }
 
         if(rightPressed && paddleX < canvas.width - paddleWidth) {
