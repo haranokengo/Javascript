@@ -34,6 +34,10 @@
       let itemY = 0;
       let itemX = 50;
 
+      let itemBall = {
+        status: 1
+      }
+
       let bricks = [];
       for(let c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
@@ -41,7 +45,7 @@
           bricks[c][r] = { x: 0, y: 0, status: 1 };
         }
       }
-      
+
       document.addEventListener("keydown", keyDownHandler, false);
       document.addEventListener("keyup", keyUpHandler, false);
       document.addEventListener("mousemove", mouseMoveHandler, false);
@@ -72,25 +76,78 @@
       }
 
       function drawItem() {
-        ctx.beginPath();
-        ctx.arc(itemX, itemY, item, 0, Math.PI*2);
-        ctx.fillStyle = "red"
-        ctx.fill();
-        ctx.closePath();
-        itemY++
+        if(itemBall.status == 0) {
+          ctx.beginPath();
+          ctx.arc(itemX, itemY, item, 0, Math.PI*2);
+          ctx.fillStyle = "red"
+          ctx.fill();
+          ctx.closePath();
+          itemY++
+        }
+        else if(itemBall.status == 1) {
+          ctx.beginPath();
+          ctx.arc(itemX, itemY, item, 0, Math.PI*2);
+          ctx.fillStyle = "blue"
+          ctx.fill();
+          ctx.closePath();
+          itemY++
+        }
       }
 
       function drawBall() {
-        if(ballStatus == 1) {
+        if(ballStatus == 0) {
           ctx.beginPath();
           ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-          ctx.fillStyle = "#0095DD";
+          ctx.fillStyle = "#00FF00";
           ctx.fill();
           ctx.closePath();
-        }else if(ballStatus == 0) {
+        }
+        else if(ballStatus == 1) {
           ctx.beginPath();
           ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-          ctx.fillStyle = "red";
+          ctx.fillStyle = "#00FFFF";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 2) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#FFFF00	";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 3) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#FF0000	";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 4) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#FF00FF";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 5) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#0000FF";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 6) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#5507FF";
+          ctx.fill();
+          ctx.closePath();
+        }
+        else if(ballStatus == 7) {
+          ctx.beginPath();
+          ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+          ctx.fillStyle = "#00F9A9";
           ctx.fill();
           ctx.closePath();
         }
@@ -104,7 +161,8 @@
               if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                 dy = -dy;
                 b.status = 0;
-                ballStatus = 0;
+                ballStatus = Math.floor( Math.random() * 8 );
+                itemBall.status = Math.floor( Math.random() * 3 );
                 score++;
                 if(score == brickRowCount * brickColumnCount) {
                   alert("YOU WIN, CONGRATULATIONS!");
@@ -174,6 +232,7 @@
           if (y+dy<canvas.height-paddleOffsetBottom-ballRadius+brickHeight) {
             if(x>paddleX && x < paddleX + paddleWidth) {
                 dy = -dy;
+                ballStatus = Math.floor( Math.random() * 8 );
             }
           }
           if(y + dy > canvas.height - ballRadius) {
@@ -193,11 +252,14 @@
         }
 
         if(itemY > canvas.height-paddleOffsetBottom-ballRadius){
-          // if(itemY < canvas.height-paddleOffsetBottom-ballRadius+brickHeight) {
+          if(itemY < canvas.height-paddleOffsetBottom-ballRadius+brickHeight) {
             if(itemX > paddleX && itemX < paddleX + paddleWidth) {
-              paddleWidth = 100;
+              if(itemBall.status == 1) {
+                paddleWidth = 100;
+              }
+              itemBall.status = 0;
             }
-          // }
+          }
         }
 
         if(rightPressed && paddleX < canvas.width - paddleWidth) {
