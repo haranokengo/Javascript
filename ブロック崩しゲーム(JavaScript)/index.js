@@ -30,13 +30,14 @@
 
       let lives = 3;
 
-      const item = 10;
-      let itemY = 0;
-      let itemX = 50;
+      // const item = 10;
+      // let itemY = 0;
+      // let itemX = 50;
 
-      let itemBall = {
-        status: 1
-      }
+      // let itemBall = {
+      //   status: 1
+      // }
+
 
       let bricks = [];
       for(let c = 0; c < brickColumnCount; c++) {
@@ -71,26 +72,19 @@
               ctx.fill();
               ctx.closePath();
             }
+            else if(bricks[c][r].status == 0) {
+              let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+              let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+              bricks[c][r].x = brickX;
+              bricks[c][r].y = brickY;
+              ctx.beginPath();
+              ctx.arc(brickX, brickY, ballRadius, 0, Math.PI*2);
+              ctx.fillStyle = "#00FF00";
+              ctx.fill();
+              ctx.closePath();
+              brickY += 3;
+            }
           }
-        }
-      }
-
-      function drawItem() {
-        if(itemBall.status == 0) {
-          ctx.beginPath();
-          ctx.arc(itemX, itemY, item, 0, Math.PI*2);
-          ctx.fillStyle = "red"
-          ctx.fill();
-          ctx.closePath();
-          itemY++
-        }
-        else if(itemBall.status == 1) {
-          ctx.beginPath();
-          ctx.arc(itemX, itemY, item, 0, Math.PI*2);
-          ctx.fillStyle = "blue"
-          ctx.fill();
-          ctx.closePath();
-          itemY++
         }
       }
 
@@ -162,7 +156,6 @@
                 dy = -dy;
                 b.status = 0;
                 ballStatus = Math.floor( Math.random() * 8 );
-                itemBall.status = Math.floor( Math.random() * 3 );
                 score++;
                 if(score == brickRowCount * brickColumnCount) {
                   alert("YOU WIN, CONGRATULATIONS!");
@@ -217,7 +210,6 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
         drawBall();
-        drawItem();
         drawPaddle();
         drawScore();
         drawLives();
@@ -251,17 +243,6 @@
           }
         }
 
-        if(itemY > canvas.height-paddleOffsetBottom-ballRadius){
-          if(itemY < canvas.height-paddleOffsetBottom-ballRadius+brickHeight) {
-            if(itemX > paddleX && itemX < paddleX + paddleWidth) {
-              if(itemBall.status == 1) {
-                paddleWidth = 100;
-              }
-              itemBall.status = 0;
-            }
-          }
-        }
-
         if(rightPressed && paddleX < canvas.width - paddleWidth) {
           paddleX += 7;
         }
@@ -273,105 +254,3 @@
 
       }
       const interval = setInterval(draw, 10);
-
-      
-
-      
-      // const block = {
-      //   width: null,
-      //   height: 20,
-      //   data: [],
-
-      //   update: function() {
-      //     this.data.forEach(brick => {
-      //       ctx.strokeRect(brick.x, brick.y, brick.width, brick.height);
-      //       ctx.stroke();
-      //     })
-      //   }
-      // }
-      // const level = [
-      //   [0,0,1,1,0,0],
-      //   [0,1,0,0,1,0],
-      //   [1,0,1,1,0,1],
-      //   [1,0,1,1,0,1],
-      //   [1,0,0,0,0,1],
-      //   [1,0,1,1,0,1],
-      // ]
-      
-
-      
-
-      
-
-
-      // const init = () => {
-      //   paddle.x = canvas.width / 2 - paddle.width / 2;
-      //   paddle.y = canvas.height - paddle.height;
-
-      //   ball.x = canvas.width / 2;
-      //   ball.y = canvas.height / 2 + 160;
-      //   ball.dx = ball.speed;
-      //   ball.dy = ball.speed;
-
-      //   block.width = canvas.width / level[0].length;
-
-      //   for(let i = 0; i < level.length; i++) {
-      //     for(let j = 0; j < level[i].length; j++) {
-      //       if(level[i][j]) {
-      //          a = block.data.push({
-      //           x: block.width * j,
-      //           y: block.height * i,
-      //           width: block.width,
-      //           height: block.height
-      //         })
-      //       }
-      //     }
-      //   }
-      // }
-
-      
-      // const loop = () => {
-      //   ctx.clearRect(0,0,canvas.width,canvas.height);
-
-      //   paddle.update();
-      //   ball.update();
-      //   block.update();
-      //   drawScore.update();
-
-      //   if(collide(ball, paddle)) {
-      //     ball.dy *= -1;
-      //     ball.y = paddle.y - ball.height;
-      //   }
-
-      //   block.data.forEach((brick, index) => {
-      //     if(collide(ball, brick)) {
-      //       ball.dy *= -1;
-      //       score++;
-      //       if(block.data.splice(index, 1));
-      //       if(score == a) {
-      //         alert("YOU WIN, CONGRATULATION!");
-      //         document.location.reload();
-      //       }
-      //     }
-      //   })
-
-      //   const interval = window.requestAnimationFrame(loop);
-      // }
-
-      // init();
-      // loop();
-
-      // document.addEventListener('keydown', e => {
-
-      //   if(e.key == 'ArrowLeft') {
-      //     if(e.key == 'ArrowLeft' && paddle.x > 0){
-      //       paddle.speed = -6;
-      //     }
-      //   }
-      //   if(e.key == 'ArrowRight') {
-      //     if(e.key == 'ArrowRight' && paddle.x < canvas.width - paddle.width) {
-      //       paddle.speed = 6;
-      //     }
-      //   }
-      // });
-      // document.addEventListener('keyup', () => paddle.speed = 0);
