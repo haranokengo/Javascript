@@ -30,15 +30,6 @@
 
       let lives = 3;
 
-      // const item = 10;
-      // let itemY = 0;
-      // let itemX = 50;
-
-      // let itemBall = {
-      //   status: 1
-      // }
-
-
       let bricks = [];
       for(let c = 0; c < brickColumnCount; c++) {
         bricks[c] = [];
@@ -77,15 +68,20 @@
               let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
               bricks[c][r].x = brickX;
               bricks[c][r].y = brickY;
-              ctx.beginPath();
-              ctx.arc(brickX, brickY, ballRadius, 0, Math.PI*2);
-              ctx.fillStyle = "#00FF00";
-              ctx.fill();
-              ctx.closePath();
-              brickY += 3;
+              drawItems(brickX, brickY);
+              brickY++;
+              drawItems(brickX, brickY);
             }
           }
         }
+      }
+
+      function drawItems(a, b) {
+        ctx.beginPath();
+        ctx.arc(a, b, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#00FF00";
+        ctx.fill();
+        ctx.closePath();
       }
 
       function drawBall() {
@@ -209,6 +205,7 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
+        drawItems();
         drawBall();
         drawPaddle();
         drawScore();
@@ -251,6 +248,5 @@
         }
         x += dx;
         y += dy;
-
       }
       const interval = setInterval(draw, 10);
