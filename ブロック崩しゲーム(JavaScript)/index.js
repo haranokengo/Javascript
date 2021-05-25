@@ -76,13 +76,13 @@
         }
       }
 
-      function drawItems(a, b) {
-        ctx.beginPath();
-        ctx.arc(a, b, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#00FF00";
-        ctx.fill();
-        ctx.closePath();
-      }
+      // function drawItems(a, b) {
+      //   ctx.beginPath();
+      //   ctx.arc(a, b, ballRadius, 0, Math.PI*2);
+      //   ctx.fillStyle = "#00FF00";
+      //   ctx.fill();
+      //   ctx.closePath();
+      // }
 
       function drawBall() {
         if(ballStatus == 0) {
