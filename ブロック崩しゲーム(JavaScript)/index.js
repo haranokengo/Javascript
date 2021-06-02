@@ -67,30 +67,20 @@
         }
       }
 
-      // let itemY = 0;
       function drawItems() {
         for(let c = 0; c < brickColumnCount; c++) {
           for(let r = 0; r < brickRowCount; r++) {
             if(bricks[c][r].status == 0) {
               let itemX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-              let itemY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+              let itemY = ((r * (brickHeight + brickPadding)) + brickOffsetTop) + ;
               ctx.beginPath();
               ctx.arc(itemX, itemY, ballRadius, 0, Math.PI*2);
               ctx.fillStyle = "#00FF00";
               ctx.fill();
               ctx.closePath();
-              itemY++;
             }
           }
         }
-          // drawItems(itemX, itemY);
-          // ctx.beginPath();
-          // ctx.arc(itemX, itemY, ballRadius, 0, Math.PI*2);
-          // ctx.fillStyle = "#00FF00";
-          // ctx.fill();
-          // ctx.closePath();
-          // itemX += 50;
-          // itemY += 50;
       }
 
       function drawBall() {
